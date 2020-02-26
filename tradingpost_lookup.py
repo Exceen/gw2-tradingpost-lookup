@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from gw2api import gw2api
 from collections import defaultdict
-
+        
 # http://gw2tno.com/api/finditemidbyname/*
 class Item(object):
     def __init__(self, id):
@@ -28,7 +28,7 @@ class Item(object):
         return self.__str__()
     def print_recipe_highlighted(self, items, n=0, c=1, m=1):
         if n > 0:
-            if self.id in items:
+            if self.id in items:    
                 spacing = ' -  ' + (' '*((n-1)*4))
             else:
                 spacing = (' '*(n*4))
@@ -103,7 +103,7 @@ def main():
 
     print '\nRecipe for', item['name'] + ' (' + str(item['data_id']) + '):'
     n = Item(item['data_id'])
-
+    
     final_list = process_data(n)
     n.print_recipe_highlighted([item[0].id for item in final_list])
 
@@ -117,7 +117,7 @@ def main():
         formatted_price = get_formatted_price(price)
 
         print ' '*3, item[1], item[0].name, '|', formatted_price if price != 0 else 'Unkown'
-    print
+    print 
     print 'Disciplines:', ', '.join(n.disciplines)
     print
     print 'Costs:', get_formatted_price(total_costs)
@@ -129,7 +129,7 @@ def main():
         print 'Listing:', get_formatted_price(gw2api.get_prices(n.id)['sells']['unit_price'])
     else:
         print 'This item is not tradable.'
-
+    
 def select_item():
     # Returns an item, selected by the user from a given query
     queue = raw_input('Search: ')
@@ -203,7 +203,7 @@ def tradable(id):
 def get_formatted_price(price):
     price = str(price)
     if len(price) % 2 and len(price) < 4:
-        price = '0' + price
+        price = '0' + price 
 
     price_g = price[:-4] if len(price) > 4 else '0'
     price_s = price[-4:][:2] if len(price) > 2 else '0'
